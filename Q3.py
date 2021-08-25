@@ -14,5 +14,3 @@ def pascaltri(n):
             newarr[i][j] = newarr[i-1][j-1]+newarr[i-1][j]
             print(newarr[i][j], end = ' ')
         print('')
-
-pascaltri(10)
