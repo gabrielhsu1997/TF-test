@@ -16,11 +16,19 @@ port_returns = []
 for i in range(1,len(df)):
     returns = df_returns.iloc[i,:].tolist()
     port_returns.append(np.dot(returns,weights))
-
 VaR95 = np.quantile(port_returns, 0.05)
+
+tail = []
+for i in range(0,len(port_returns)):
+    if port_returns[i] < VaR95:
+        tail.append(port_returns[i])
+CVaR95 = np.mean(tail)
 
 # b. via Parametric Method
 port_mean = np.mean(port_returns)
 cov_matrix = df_returns.cov()
 port_std = np.sqrt(np.dot(weights.T,np.dot(cov_matrix,weights)))
 newVaR95 = norm.ppf(0.05,port_mean,port_std)
+newCVaR95 = norm.expect(loc = port_mean, scale = port_std, ub = newVaR95) / 0.05
+
+# c. 
