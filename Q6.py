@@ -9,16 +9,16 @@ import re
 
 f = open("test.txt", "r")
 
-text = f.read()
+text = f.read() # convert text to string
 
-pattern1 = "\d{4}/\d{2}/\d{2}"
+pattern1 = "\d{4}/\d{2}/\d{2}" # create the regular expressions
 pattern2 = "\d{2}/\d{2}/\d{4}"
 pattern3 = "\d{2} \w{3} \d{4}"
 
 datecount = 0
 months = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sept","Oct","Nov","Dec"]
 
-dates1 = re.findall(pattern1,text)
+dates1 = re.findall(pattern1,text) 
 for date in dates1: # account for most valid dates barring short months
     year, month, day = map(int, date.split("/"))
     if 1 <= day <= 31 and 1 <= month <= 12:
@@ -27,7 +27,7 @@ for date in dates1: # account for most valid dates barring short months
 dates2 = re.findall(pattern2,text)
 for date in dates2:
     day_or_month, month_or_day, year = map(int, date.split("/"))
-    if 1 <= day_or_month <= 31 and 1 <= month_or_day <= 12:
+    if 1 <= day_or_month <= 31 and 1 <= month_or_day <= 12: # account for both DD/MM and MM/DD seperately
         datecount += 1
     elif 1 <= day_or_month <= 12 and 1 <= month_or_day <= 31:
         datecount += 1
@@ -37,7 +37,7 @@ for date in dates3:
     day, month, year = date.split(" ")
     year = int(year)
     day = int(day)
-    if month in months:
+    if month in months: # account for correct month input
         if 1 <= day <= 31:
             datecount += 1
 
