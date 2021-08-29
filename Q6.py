@@ -41,4 +41,6 @@ for date in dates3:
         if 1 <= day <= 31:
             datecount += 1
 
+print(datecount)
+
 f.close()
